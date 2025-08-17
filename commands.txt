@@ -1,0 +1,44 @@
+1) pip install -r requirements.txt
+
+Save the stable diffusion 1.4 pipeline (text encoder, tokenizer, scheduler, VAE, and U-Net).
+
+2) python3 load_save.py --pipeline CompVis/stable-diffusion-v1-4 --save_dir sd_14
+
+Training (Updating parameters for erasing)
+Store the prepared images in a directory. Supported .png, jpg, and .jpeg
+
+.
+└── ds
+    └── eiffel_tower 
+        ├── eiffel_tower-01.jpg
+        ├── eiffel_tower-02.png
+        ├── eiffel_tower-03.jpg
+        └── eiffel_tower-04.jpeg
+
+Run following command for training (erasing).
+
+3) python3 train.py --concept "Eiffel Tower" --concept_type object --save eiffel-tower --data ds/eiffel_tower --local --text_encoder_path sd_14/text_encoder --diffusion_path sd_14 --epochs 4
+
+3.1)python3 train.py --concept "Apple" --concept_type object --save apple --data ds/apple --local --text_encoder_path models/sd1-14/text_encoder --diffusion_path models/sd1-14 --epochs 4
+
+inference (PNDM Scheduler and 100 inference steps)
+
+4) python3 infer.py "a photo of Eiffel Tower." eiffel-tower/epoch-2 --tokenizer_path sd_14/tokenizer --unet_path sd_14/unet --vae_path sd_14/vae
+
+
+4.1)python3 infer.py "a photo of Apple fruit." apple/epoch-2 --tokenizer_path models/sd1-14/tokenizer --unet_path models/sd1-14/unet --vae_path models/sd1-14/vae
+
+
+python3 infer.py "a photo of Mount Rushmore." mount_rushmore/epoch-2 --tokenizer_path models/sd1-14/tokenizer --unet_path models/sd1-14/unet --vae_path models/sd1-14/vae
+
+clip score:
+python3 eval.py clip-score exp/taj_mahal --device 0
+
+FID score:
+python3 eval.py fid exp/taj_mahal --orig_dir ds/taj_mahal --device 0
+
+ python3 manage.py runserver
+
+
+python3 manage.py migrate
+python3 manage.py runserver

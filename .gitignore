@@ -1,0 +1,51 @@
+# Operating System files
+.DS_Store
+Thumbs.db
+
+exp/
+extra_generated_img/
+apple/
+burj-khalifa/
+csv_file/
+eiffel-tower/
+elon-musk/
+horse/
+mount_rushmore/
+reporteiffel/
+statue_of_liberty/
+taj_mahal/
+models/
+inferapp/
+
+
+# Python bytecode
+*.pyc
+__pycache__/
+
+# Virtual environments
+venv/
+env/
+.env/
+
+# Data and output files
+*.log
+*.csv
+*.json
+*.pkl
+*.bin
+/data/
+/output/
+/models/ # If your trained models are large and not meant for Git
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Jupyter Notebook specific
+.ipynb_checkpoints/
+
+# Compiled files / Build directories
+/build/
+/dist/
